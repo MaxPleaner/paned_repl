@@ -8,11 +8,12 @@ class PanedRepl::Repls::BaseRepl
 
   include PanedRepl::Tmux
 
-  attr_reader :name
+  attr_reader :name, :pane
 
   include AutoInitializer
 
   def start
+    @pane = 0
     Instances[name] = self
     PanedRepl.class_exec { Pry.start }
   end
