@@ -1,9 +1,5 @@
 module PanedRepl::Tmux
 
-  def split(direction, *args)
-    send(:"split_#{direction}", *args)
-  end
-
   def select_pane(n)
     `tmux select-pane -t #{n}`
   end
@@ -11,24 +7,22 @@ module PanedRepl::Tmux
   def split_vertical(pane_num=nil)
     pane_num ||= pane
     select_pane(pane_num)
-    system "tmux split-window -v -t #{name}"
-    if pane_num = pane
+    system "tmux split-window -v"
+    if pane_num == pane
       swap_pane pane, pane + 1
     end
     @pane = pane + 1
-    # even_vertical
     select_pane(pane)
   end
 
   def split_horizontal(pane_num=nil)
     pane_num ||= pane
     select_pane(pane_num)
-    system "tmux split-window -h -t #{name}"
+    system "tmux split-window -h"
     if pane_num == pane
       swap_pane pane, pane + 1
     end
     @pane = pane + 1
-    # even_horizontal
     select_pane(pane)
   end
 
@@ -40,33 +34,41 @@ module PanedRepl::Tmux
     `tmux kill-pane -t #{n}`
   end
 
+  def start_paned_repl(pane_num, session_name=nil)
+    create_session(session_name) if session_name
+    send_keys pane_num, <<-SH
+      require 'paned_repl'
+      PanedRepl.start %{#{session_name || name}}
+    SH
+  end
+
   def send_keys(keys, pane_num=nil)
-    if pane_num
-      select_pane pane_num
-    end
     system <<-SH
-      tmux send-keys \
-        -t #{name} \
-        "#{keys}" \
-        C-m
+      tmux send-keys -t #{pane_num || pane} "#{keys}" C-m
     SH
     select_pane pane
   end
 
-  def attach
-    system "tmux attach -t #{name}"
+  def create_session(session_name=nil)
+    session_name ||= name
+    system "tmux new -s #{session_name} -d"
+  end
+
+  def attach(session_name=nil)
+    session_name ||= name
+    system "tmux attach -t #{session_name}"
   end
 
   def even_vertical
-    system "tmux select-layout -t #{name} even-vertical"
+    system "tmux select-layout even-vertical"
   end
 
   def even_horizontal
-    system "tmux select-layout -t #{name} even-horizontal"
+    system "tmux select-layout even-horizontal"
   end
 
   def tiled
-    system "tmux select-layout -t #{name} tiled"
+    system "tmux select-layout tiled"
   end
 
 end

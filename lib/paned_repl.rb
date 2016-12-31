@@ -3,12 +3,22 @@ require 'auto_initializer'
 
 module PanedRepl
 
-  def self.panes
-    PanedRepl::Repls::BaseRepl::Instances
+  def self.sessions
+    PanedRepl::Repls::BaseRepl::Sessions
   end
 
-  def self.start
-    Repls::BaseRepl.start
+  def self.base_session
+    sessions["paned_repl_base_tmux_session"]
+  end
+
+  def panes
+    sessions.reduce({}) do |hash, (k,v)|
+      hash[k] = v.pane.times.to_a
+    end
+  end
+
+  def self.start(name)
+    Repls::BaseRepl.start(name)
   end
 
   def self.const name

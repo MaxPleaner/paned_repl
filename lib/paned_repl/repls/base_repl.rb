@@ -1,10 +1,10 @@
 class PanedRepl::Repls::BaseRepl
 
-  def self.start(name="test")
+  def self.start(name)
     new(name: name).start
   end
 
-  Instances = {}
+  Sessions = {}
 
   include PanedRepl::Tmux
 
@@ -14,7 +14,7 @@ class PanedRepl::Repls::BaseRepl
 
   def start
     @pane = 0
-    Instances[name] = self
+    Sessions[name] = self
     PanedRepl.class_exec { Pry.start }
   end
 

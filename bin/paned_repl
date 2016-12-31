@@ -22,19 +22,19 @@ CLI_SCRIPT = <<-SH
 
 #!/bin/bash
 
-TMUX_SESSION_NAME=test
+BASE_TMUX_SESSION=paned_repl_base_tmux_session
 
-tmux new -s $TMUX_SESSION_NAME -d
+tmux new -s $BASE_TMUX_SESSION -d
 
-tmux send-keys -t $TMUX_SESSION_NAME:0.0 \
+tmux send-keys -t $BASE_TMUX_SESSION:0.0 \
 "
   ruby -e '
     require %{paned_repl};
-    PanedRepl.start;
+    PanedRepl.start(%{$BASE_TMUX_SESSION});
   '
 " C-m
 
-tmux attach -t $TMUX_SESSION_NAME
+tmux attach -t $BASE_TMUX_SESSION
 
 SH
 

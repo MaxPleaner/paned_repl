@@ -3,7 +3,7 @@ Gem::Specification.new do |s|
   s.name        = "paned_repl"
   s.version     = PanedRepl::VERSION
   s.date        = "2016-12-31"
-  s.summary     = "REPL with added multi-pane API using tmux"
+  s.summary     = "A TMux wrapper for dynamic multiplexing in a REPL"
   s.description = ""
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["maxpleaner"]
