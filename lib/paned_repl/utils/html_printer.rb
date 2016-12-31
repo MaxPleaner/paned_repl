@@ -1,4 +1,3 @@
-require 'auto_initializer'
 
 class PanedRepl::Utils::HtmlPrinter
 

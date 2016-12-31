@@ -1,12 +1,20 @@
 require 'gemmy'
+require 'auto_initializer'
 
 module PanedRepl
+
+  def self.panes
+    PanedRepl::Repls::BaseRepl::Instances
+  end
+
   def self.start
     Repls::BaseRepl.start
   end
+
   def self.const name
     Constants.const_get name
   end
+
 end
 
 first_dependencies = [

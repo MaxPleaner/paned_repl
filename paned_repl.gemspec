@@ -17,5 +17,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'gemmyrb'
   s.add_dependency 'colored'
   s.add_dependency 'thor'
+  s.add_dependency 'auto_initializer'
+
   s.license     = 'MIT'
 end
