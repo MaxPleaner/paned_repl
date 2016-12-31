@@ -1,10 +1,41 @@
 #!/usr/bin/env ruby
-require 'paned_repl'
-class PanedRepl::CLI < Thor
-  desc "test", "run tests"
-  def test
-    puts "No tests have been wrritten"
-    exit
+
+require 'thor'
+require 'colored'
+
+GENERATED_FILE_NAME = "paned_repl.sh"
+
+class PanedReplCLI < Thor
+  desc "init", "init"
+  def init
+    `touch #{GENERATED_FILE_NAME}`
+    `chmod a+x #{GENERATED_FILE_NAME}`
+    File.open(GENERATED_FILE_NAME, 'w') do |f|
+      f.write CLI_SCRIPT
+    end
+    puts "generated #{GENERATED_FILE_NAME}".green
+    puts "run with: #{"sh #{GENERATED_FILE_NAME}".bold}"
   end
 end
-PanedRepl::CLI.start ARGV
+
+CLI_SCRIPT = <<-SH
+
+#!/bin/bash
+
+TMUX_SESSION_NAME=paned_repl_tmux
+
+tmux new -s $TMUX_SESSION_NAME -d
+
+tmux send-keys -t $TMUX_SESSION_NAME:0.0 \
+"
+  ruby -e '
+    require %{paned_repl};
+    PanedRepl.start
+  '
+" C-m
+
+tmux attach -t $TMUX_SESSION_NAME
+
+SH
+
+PanedReplCLI.start ARGV
