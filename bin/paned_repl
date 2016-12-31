@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require 'paned_repl'
+class PanedRepl::CLI < Thor
+  desc "test", "run tests"
+  def test
+    puts "No tests have been wrritten"
+    exit
+  end
+end
+PanedRepl::CLI.start ARGV
