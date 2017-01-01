@@ -11,7 +11,7 @@ module PanedRepl
     sessions["paned_repl_base_tmux_session"]
   end
 
-  def panes
+  def self.panes
     sessions.reduce({}) do |hash, (k,v)|
       hash[k] = v.pane.times.to_a
     end
@@ -26,6 +26,7 @@ module PanedRepl
   end
 
 end
+
 
 first_dependencies = [
   *Gem.find_files("paned_repl/constants.rb").to_a

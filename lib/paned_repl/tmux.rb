@@ -34,17 +34,9 @@ module PanedRepl::Tmux
     `tmux kill-pane -t #{n}`
   end
 
-  def start_paned_repl(pane_num, session_name=nil)
-    create_session(session_name) if session_name
-    send_keys pane_num, <<-SH
-      require 'paned_repl'
-      PanedRepl.start %{#{session_name || name}}
-    SH
-  end
-
-  def send_keys(keys, pane_num=nil)
+  def send_keys(keys)
     system <<-SH
-      tmux send-keys -t #{pane_num || pane} "#{keys}" C-m
+      tmux send-keys "#{keys}" C-m
     SH
     select_pane pane
   end
