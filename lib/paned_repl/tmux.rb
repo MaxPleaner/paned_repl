@@ -34,9 +34,10 @@ module PanedRepl::Tmux
     `tmux kill-pane -t #{n}`
   end
 
-  def send_keys(keys)
+  def send_keys(keys, frame_id)
+    frame_selector = %{ -t #{frame_id} } if frame_id
     system <<-SH
-      tmux send-keys "#{keys}" C-m
+      tmux send-keys #{frame_selector} "#{keys}" C-m
     SH
     select_pane pane
   end

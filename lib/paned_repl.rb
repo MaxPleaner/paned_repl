@@ -11,12 +11,6 @@ module PanedRepl
     sessions["paned_repl_base_tmux_session"]
   end
 
-  def self.panes
-    sessions.reduce({}) do |hash, (k,v)|
-      hash[k] = v.pane.times.to_a
-    end
-  end
-
   def self.start(name)
     Repls::BaseRepl.start(name)
   end
