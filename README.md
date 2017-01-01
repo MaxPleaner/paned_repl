@@ -26,8 +26,8 @@ session.split_horizontal
 # make the panes equal size
 session.even_horizontal
 
-new_pane_id = 0 # There are 1 total panes, and the main pane is always the last
-                # Therefore the new pane has an id of 0.
+new_pane_id = 0 # There are 2 total panes, and the main pane is always the last
+                # Therefore (with 0-indexing) the new pane has an id of 0.
                 # If a third pane were added, it would have an id of 1 and the main
                 # pane would have an id of 2.
 
