@@ -25,4 +25,4 @@ session.send_keys "echo hello"
 
 There is intended to be one pane that handles direct user input. The other panes just receice commands through `send_keys`.
 
-See [./lib/paned_repl/tmux.rb]([lib/paned_repl/tmux.rb) for more commands that can be used. 
+See [./lib/paned_repl/tmux.rb](lib/paned_repl/tmux.rb) for more commands that can be used. 
