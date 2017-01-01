@@ -19,10 +19,11 @@ There is a Ruby wrapper over TMux commands. For example:
 # launching subsequent Tmux sessions is not implemented
 session = PanelRepl.sessions.values.first
 
-# create a new pane, but maintain focus on main frame
+# create a new pane, but maintain focus on main frame.
+# swaps positions so the main pane is always last
 session.split_horizontal
 
-# make the panes equal size, and swap positions so the main pane is always last
+# make the panes equal size
 session.even_horizontal
 
 new_pane_id = 0 # There are 1 total panes, and the main pane is always the last
