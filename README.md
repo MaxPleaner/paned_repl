@@ -14,9 +14,9 @@ inside the REPL, require whatever programs you need.
 There is a Ruby wrapper over TMux commands. For example:
 
 ```rb
-# There is a root session automatically created, and creating more sessions isn't implemented
-
 # the 'main pane' receives tmux commands
+# this refers to a root Tmux session that is automatically created.
+# launching subsequent Tmux sessions is not implemented
 session = PanelRepl.sessions.values.first
 
 # create a new pane, but maintain focus on main frame
