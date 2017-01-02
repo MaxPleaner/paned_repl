@@ -32,6 +32,7 @@ module PanedRepl::Tmux
 
   def kill_pane(n)
     `tmux kill-pane -t #{n}`
+    @pane = pane - 1
   end
 
   def send_keys(keys, frame_id)
