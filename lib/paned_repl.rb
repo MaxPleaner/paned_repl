@@ -11,8 +11,8 @@ module PanedRepl
     sessions["paned_repl_base_tmux_session"]
   end
 
-  def self.start(name)
-    Repls::BaseRepl.start(name)
+  def self.start(name, &blk)
+    Repls::BaseRepl.start(name, &blk)
   end
 
   def self.const name

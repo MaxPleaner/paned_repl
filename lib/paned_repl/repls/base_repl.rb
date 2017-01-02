@@ -1,7 +1,7 @@
 class PanedRepl::Repls::BaseRepl
 
-  def self.start(name)
-    new(name: name).start
+  def self.start(name, &blk)
+    new(name: name).start(&blk)
   end
 
   Sessions = {}
@@ -12,9 +12,10 @@ class PanedRepl::Repls::BaseRepl
 
   include AutoInitializer
 
-  def start
+  def start(&blk)
     @pane = 0
     Sessions[name] = self
+    Thread.new(&blk) if blk
     PanedRepl.class_exec { Pry.start }
   end
 
