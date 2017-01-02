@@ -12,6 +12,7 @@ module PanedRepl::Tmux
       swap_pane pane, pane + 1
     end
     @pane = pane + 1
+    @pane_count = pane_count + 1
     select_pane(pane)
   end
 
@@ -23,6 +24,7 @@ module PanedRepl::Tmux
       swap_pane pane, pane + 1
     end
     @pane = pane + 1
+    @pane_count = pane_count + 1
     select_pane(pane)
   end
 
@@ -33,6 +35,7 @@ module PanedRepl::Tmux
   def kill_pane(n)
     `tmux kill-pane -t #{n}`
     @pane = pane - 1
+    @pane_count = pane_count - 1
   end
 
   def send_keys(keys, frame_id)
