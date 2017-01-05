@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'colored'
   s.add_dependency 'thor'
   s.add_dependency 'auto_initializer'
-  s.add_dependency 'keyword_hash_builder'
 
   s.license     = 'MIT'
 end

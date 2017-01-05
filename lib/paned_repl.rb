@@ -1,5 +1,10 @@
 require 'gemmy'
 require 'auto_initializer'
+require 'byebug'
+require 'securerandom'
+require 'awesome_print'
+require 'faye/websocket'
+require 'eventmachine'
 
 module PanedRepl
 
