@@ -3,10 +3,9 @@ Thread.abort_on_exception = true
 
 module TopLevelExtensions
 
-  def exit_tmux
-    panes.data.values.sort.reverse.each &base.method(:kill_pane)
+  def exit_tmux(pane_count=0)
+    pane_count.times { base.kill_pane(0) }
     `pkill tmux`
-    exit
   end
 
   def to_shell_command(ruby_string)
