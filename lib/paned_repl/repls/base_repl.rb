@@ -13,7 +13,7 @@ class PanedRepl::Repls::BaseRepl
   include AutoInitializer
 
   def start(&blk)
-    @pane = 0
+    Object.include TopLevelExtensions
     Sessions[name] = self
     Thread.new(&blk) if blk
     PanedRepl.class_exec { Pry.start }

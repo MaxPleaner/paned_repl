@@ -4,28 +4,29 @@ module PanedRepl::Tmux
     `tmux select-pane -t #{n}`
   end
 
+  def main_pain
+    @main_pain ||= 0
+  end
+
   def split_vertical(pane_num=nil)
-    pane_num ||= pane
     select_pane(pane_num)
     system "tmux split-window -v"
-    if pane_num == pane
-      swap_pane pane, pane + 1
+    if pane_num == main_pane
+      swap_pane main_pane, main_pane + 1
     end
-    @pane = pane + 1
-    @pane_count = pane_count + 1
-    select_pane(pane)
+    @main_pane = main_pane + 1
+    select_pane(main_pane)
   end
 
   def split_horizontal(pane_num=nil)
-    pane_num ||= pane
+    pane_num ||= main_pane
     select_pane(pane_num)
     system "tmux split-window -h"
-    if pane_num == pane
-      swap_pane pane, pane + 1
+    if pane_num == main_pane
+      swap_pane main_pane, main_pane + 1
     end
-    @pane = pane + 1
-    @pane_count = pane_count + 1
-    select_pane(pane)
+    @main_pane = main_pane + 1
+    select_pane(main_pane)
   end
 
   def swap_pane(n1,n2)
@@ -34,8 +35,7 @@ module PanedRepl::Tmux
 
   def kill_pane(n)
     `tmux kill-pane -t #{n}`
-    @pane = pane - 1
-    @pane_count = pane_count - 1
+    @main_pane = main_pane - 1
   end
 
   def send_keys(keys, frame_id)
@@ -43,7 +43,7 @@ module PanedRepl::Tmux
     system <<-SH
       tmux send-keys #{frame_selector} "#{keys}" C-m
     SH
-    select_pane pane
+    select_pane main_pane
   end
 
   def create_session(session_name=nil)
