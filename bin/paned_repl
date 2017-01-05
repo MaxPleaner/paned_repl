@@ -3,9 +3,15 @@
 require 'thor'
 require 'colored'
 
+require 'paned_repl'
+
 GENERATED_FILE_NAME = "paned_repl.sh"
 
 class PanedReplCLI < Thor
+  desc "version", "version"
+  def version
+    puts PanedRepl::VERSION
+  end
   desc "init", "init"
   def init
     `touch #{GENERATED_FILE_NAME}`

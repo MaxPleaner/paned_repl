@@ -13,6 +13,7 @@ class PanedRepl::Repls::BaseRepl
   include AutoInitializer
 
   def start(&blk)
+    setup_tmux
     Object.include TopLevelExtensions
     Sessions[name] = self
     Thread.new(&blk) if blk

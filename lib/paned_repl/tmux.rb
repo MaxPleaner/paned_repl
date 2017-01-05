@@ -1,5 +1,9 @@
 module PanedRepl::Tmux
 
+  def setup_tmux
+    @main_pane = 0
+  end
+
   def select_pane(n)
     `tmux select-pane -t #{n}`
   end
