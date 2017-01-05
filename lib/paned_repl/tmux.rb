@@ -9,6 +9,7 @@ module PanedRepl::Tmux
   end
 
   def split_vertical(pane_num=nil)
+    pane_num ||= @main_pane
     select_pane(pane_num)
     system "tmux split-window -v"
     if pane_num == @main_pane
