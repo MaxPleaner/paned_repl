@@ -15,9 +15,11 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 2.5.1"
   s.executables = Dir["bin/*"].map &File.method(:basename)
   s.add_dependency 'gemmyrb'
-  s.add_dependency 'colored'
-  s.add_dependency 'thor'
   s.add_dependency 'auto_initializer'
+  s.add_dependency 'colored'
+  s.add_dependency 'byebug'
+  s.add_dependency 'thor'
+  s.add_dependency 'awesome_print'
 
   s.license     = 'MIT'
 end
