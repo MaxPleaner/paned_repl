@@ -28,8 +28,8 @@ session.even_horizontal
 
 new_pane_id = 0 # There are 2 total panes, and the main pane is always the last
                 # Therefore (with 0-indexing) the new pane has an id of 0.
-                # If a third pane were added, it would have an id of 1 and the main
-                # pane would have an id of 2.
+                # When a new pane is added, it always has the index of 0 and all other indexes
+                # need to be incremented by one..
 
 session.send_keys "echo hello", new_pane_id
 ```
