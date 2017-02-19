@@ -37,3 +37,9 @@ session.send_keys "echo hello", new_pane_id
 There is intended to be one pane that handles direct user input. The other panes just receive commands through `send_keys`.
 
 See [./lib/paned_repl/tmux.rb](lib/paned_repl/tmux.rb) for more commands that can be used. 
+
+The generated `paned_repl.sh` script can be customized to run commands when the repl begins.
+
+Gif:
+
+[![asciicast](https://asciinema.org/a/0j2kffw5oj66hf6u08hnx7872.png)](https://asciinema.org/a/0j2kffw5oj66hf6u08hnx7872)
